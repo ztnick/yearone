@@ -1,0 +1,42 @@
+seira 3:
+
+#include "pzhelp"  
+FUNC int gcd (int i, int j) {  
+   if (i==0 OR j==0)  
+      return i+j;  
+    else if (i > j)  
+       return gcd(i%j, j);  
+     else  
+        return gcd(i, j%i);  
+}  
+PROGRAM{  
+  int n,a,b,i,c,d,res1,res2,one,two,w,y;  
+  char oper;  
+  n=READ_INT();  
+ FOR (i,1 TO n){  
+   SKIP_LINE();  
+  oper=getchar(); a=READ_INT();  
+  b=READ_INT(); c=READ_INT(); d=READ_INT();   
+ if ((b==0 OR d==0) || (oper=='/' && c==0)) WRITELN("error");  
+ else {  
+  switch(oper){  
+  case'+':res1=a * d + c * b; res2=b * d; break;  
+  case'*':res1= a * c; res2=b * d; break;  
+  case'/':res1=a * d; res2=b * c; break;  
+  case'-':res1=(a*d-c*b); res2=b*d; break;  
+   }  
+ // if (oper=='/' AND c==0) WRITELN("error");  
+       one=res1/gcd(abs(res1),abs(res2)) ;  
+       two=res2/gcd(abs(res1),abs(res2)) ;  
+       w=one%two;  
+       y=one/two;  
+         
+         
+  if((one>0 AND two<0) OR (one<0 AND two>0)) {  
+     if(y==0) WRITELN("-0",abs(w),abs(two));  
+     else WRITELN(y,abs(w),abs(two));  
+     }  
+  else WRITELN(abs(y),abs(w),abs(two));  
+ }  
+ }  
+}  
